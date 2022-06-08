@@ -1,0 +1,29 @@
+{
+  "name": "koa2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js",
+    "postinstall": "patch-package"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-cors": "^0.0.16",
+    "koa-jwt": "^4.0.3",
+    "koa-router": "^10.1.1",
+    "koa-swagger-generator-api": "^1.1.0",
+    "koa2-swagger-ui": "^5.5.1",
+    "mysql": "^2.18.1",
+    "openapi-types": "^12.0.0",
+    "patch-package": "^6.4.7",
+    "swagger-jsdoc": "^6.2.1"
+  }
+}

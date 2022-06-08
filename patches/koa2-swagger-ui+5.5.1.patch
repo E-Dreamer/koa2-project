@@ -1,0 +1,24 @@
+diff --git a/node_modules/koa2-swagger-ui/dist/index.hbs b/node_modules/koa2-swagger-ui/dist/index.hbs
+index 97365a7..c58f81b 100644
+--- a/node_modules/koa2-swagger-ui/dist/index.hbs
++++ b/node_modules/koa2-swagger-ui/dist/index.hbs
+@@ -5,7 +5,7 @@
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>{{title}}</title>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{swaggerVersion}}/swagger-ui.min.css">
++  <link rel="stylesheet" href="https://lib.baomitu.com/swagger-ui/4.12.0/swagger-ui.min.css">
+   <link rel="icon" type="image/png" href="{{favicon}}" />
+   <style>
+     html
+@@ -70,8 +70,8 @@
+ 
+ <div id="swagger-ui"></div>
+ 
+-<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{swaggerVersion}}/swagger-ui-bundle.js"></script>
+-<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{swaggerVersion}}/swagger-ui-standalone-preset.js"></script>
++<script src="https://lib.baomitu.com/swagger-ui/4.12.0/swagger-ui-bundle.js"></script>
++<script src="https://lib.baomitu.com/swagger-ui/4.12.0/swagger-ui-standalone-preset.js"></script>
+ <script>
+ function HideTopbarPlugin() {
+   // this plugin overrides the Topbar component to return nothing
