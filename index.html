@@ -1,0 +1,120 @@
+<!--
+ * @Author: E-Dreamer
+ * @Date: 2022-06-22 09:46:32
+ * @LastEditTime: 2022-06-22 14:55:47
+ * @LastEditors: E-Dreamer
+ * @Description: 
+-->
+<!--
+ * @Author: E-Dreamer
+ * @Date: 2022-06-22 09:36:31
+ * @LastEditTime: 2022-06-22 09:37:46
+ * @LastEditors: E-Dreamer
+ * @Description:
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.0.0-alpha.1/axios.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.5/qs.js"></script>
+  </head>
+  <body>
+    <form action="" id="form">
+      <div>
+        用户名: <input type="text" name="name" /> 密码:
+        <input type="text" name="password" />
+      </div>
+    </form>
+
+    <button id="login">登录</button>
+
+    <div>
+      <button id="user">查询用户</button>
+    </div>
+    <div>
+      <button id="logout">退出登录</button>
+    </div>
+  </body>
+  <script>
+    const request = axios.create({
+      baseURL: ' http://127.0.0.1:5000/',
+      timeout: 500000,
+    })
+    function getToken() {
+      return localStorage.getItem('token')
+    }
+    //请求拦截器
+    request.interceptors.request.use(
+      (config) => {
+        if (getToken()) {
+          config.headers['Authorization'] = getToken()
+        }
+        if (config.headers['Content-Type'] === 'multipart/form-data') {
+          const options = {
+            initialFormData: new FormData(),
+            showLeafArrayIndexes: true,
+            includeNullValues: false,
+            mapping: function (value) {
+              if (typeof value === 'boolean') {
+                return +value ? '1' : '0'
+              }
+              return value
+            },
+          }
+
+          const formData = jsonToFormData(config.data, options)
+          config.data = formData
+        }
+        if (!config.headers['Content-Type']) {
+          config.headers['Content-Type'] = 'application/json'
+        }
+        return config
+      },
+      (error) => {
+        Promise.reject(error)
+      }
+    )
+
+    request.interceptors.response.use(
+      (response) => {
+        return response.data
+      },
+      (error) => {
+
+        console.log(error,'错误信息')
+        Promise.reject(error)
+      }
+    )
+    // Authorization
+    document.querySelector('#login').addEventListener('click', submit)
+    function submit() {
+      const form = document.querySelector('#form')
+      const input = form.getElementsByTagName('input')
+      let params = {}
+      for (let i = 0; i < input.length; i++) {
+        params[input[i].name] = input[i].value
+      }
+      request.post('/login', params).then((res) => {
+        localStorage.setItem('token', res.data)
+      })
+    }
+
+    document.querySelector('#user').addEventListener('click', getUser)
+    document.querySelector('#logout').addEventListener('click', logout)
+    function getUser() {
+      //headers:{'Authorization':getToken()
+      request.get('/user', { params: { page: 0, size: 10 } }).then((res) => {
+        console.log(res)
+      })
+    }
+    function logout() {
+      request.delete('/logout').then(res=>{
+        console.log(res)
+      })
+    }
+  </script>
+</html>

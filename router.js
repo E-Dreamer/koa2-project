@@ -1,7 +1,7 @@
 /*
  * @Author: E-Dreamer
  * @Date: 2022-06-06 10:08:31
- * @LastEditTime: 2022-06-07 08:51:33
+ * @LastEditTime: 2022-06-22 10:39:51
  * @LastEditors: E-Dreamer
  * @Description:
  */
@@ -35,7 +35,7 @@ const api = require('./api')
 router.post('/login', (ctx) => {
   return api.login(ctx)
 })
-router.post('/logout', (ctx) => {
+router.delete('/logout', (ctx) => {
   return api.logout(ctx)
 })
 
@@ -64,5 +64,10 @@ router.post('/logout', (ctx) => {
  */
 router.post('/register', (ctx) => {
   return api.register(ctx)
+})
+
+
+router.get('/user',(ctx)=>{
+  return api.user(ctx)
 })
 module.exports = router

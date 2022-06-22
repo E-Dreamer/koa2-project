@@ -1,7 +1,7 @@
 /*
  * @Author: E-Dreamer
  * @Date: 2022-06-06 09:44:58
- * @LastEditTime: 2022-06-07 08:51:00
+ * @LastEditTime: 2022-06-22 14:56:36
  * @LastEditors: E-Dreamer
  * @Description:
  */
@@ -34,7 +34,7 @@ app.use(async (ctx, next) => {
 })
 //去除一些不需要通过jwt验证的
 app.use(
-  jwtKoa({ secret: secret }).unless({
+  jwtKoa({ secret: secret}).unless({
     path: [/^\/login/, /^\/register/, /^\/swagger/,/^\/api-docs/],
   })
 )
@@ -80,6 +80,8 @@ koaSwagger(options)
 //   })
 // )
 //未使用swagger的时候使用
+
+// router.prefix('/api')  // api前缀
 app.use(router.routes())
 /*
   请求方式不匹配的时候,会报请求方式不被允许
